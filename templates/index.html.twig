@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>File upload with virus</h1>
+    <form enctype="multipart/form-data" method="post" id="form" action="{{ path('app_bundle_upload') }}">
+        <label for="file">File to upload : </label>
+        <input id="file" name="file" type="file"/>
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}
