@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  nginx:
+    container_name: clamav_nginx
+    build:
+      context: .
+      target:
+        clamav_nginx
+    depends_on:
+      - php
+    ports:
+      - '8080:80'
+    volumes:
+      - ./public:/var/www/html/public:ro
+
+  php:
+    container_name: clamav_php
+    build:
+      context: .
+      target:
+        clamav_php
+    volumes:
+      - .:/var/www/html:rw,cached
+
+  clamav:
+    container_name: clamav_clamav
+    image: mkodockx/docker-clamav:alpine
+    expose:
+      - 3310
+    ports:
+      - '3310:3310'
